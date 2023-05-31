@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ApiRestController {
     //The url to this method is localhost:8080/api/first/good-night
     @GetMapping("/good-night")
-    public ResponseEntity<String> goodNight(){
-        return ResponseEntity.ok("good night =D");
+    public ResponseEntity<String> goodNight() {
+        return ResponseEntity.ok("<h1>good night =D</h1>");
     }
 }

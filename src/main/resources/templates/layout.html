@@ -1,0 +1,2739 @@
+<!DOCTYPE html>
+
+<!-- Dependencies need to run this html as layout in thymeleaf-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+    <!-- "Getting" a layout for our page =D -->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <title>Lds</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description">
+        <meta content="Coderthemes" name="author">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="https://coderthemes.com/minton/layouts/assets/images/favicon.ico">
+
+        <!-- plugin css -->
+        <link href="./Sales Dashboard _ Minton - Admin &amp; Dashboard Template_files/jquery-jvectormap-1.2.2.css"
+              rel="stylesheet" type="text/css">
+
+        <!-- App css -->
+        <link href="./Sales Dashboard _ Minton - Admin &amp; Dashboard Template_files/bootstrap.min.css"
+              rel="stylesheet" type="text/css" id="bs-default-stylesheet" disabled="disabled">
+        <link href="./Sales Dashboard _ Minton - Admin &amp; Dashboard Template_files/app.min.css" rel="stylesheet"
+              type="text/css" id="app-default-stylesheet" disabled="disabled">
+
+        <link href="./Sales Dashboard _ Minton - Admin &amp; Dashboard Template_files/bootstrap-dark.min.css"
+              rel="stylesheet" type="text/css" id="bs-dark-stylesheet">
+        <link href="./Sales Dashboard _ Minton - Admin &amp; Dashboard Template_files/app-dark.min.css" rel="stylesheet"
+              type="text/css" id="app-dark-stylesheet">
+
+        <!-- icons -->
+        <link href="./Sales Dashboard _ Minton - Admin &amp; Dashboard Template_files/icons.min.css" rel="stylesheet"
+              type="text/css">
+
+        <style id="apexcharts-css">.apexcharts-canvas {
+  position: relative;
+  user-select: none;
+  /* cannot give overflow: hidden as it will crop tooltips which overflow outside chart area */
+}
+
+
+/* scrollbar is not visible by default for legend, hence forcing the visibility */
+.apexcharts-canvas ::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 6px;
+}
+
+.apexcharts-canvas ::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, .5);
+  box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+  -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+}
+
+
+.apexcharts-inner {
+  position: relative;
+}
+
+.apexcharts-text tspan {
+  font-family: inherit;
+}
+
+.legend-mouseover-inactive {
+  transition: 0.15s ease all;
+  opacity: 0.20;
+}
+
+.apexcharts-series-collapsed {
+  opacity: 0;
+}
+
+.apexcharts-tooltip {
+  border-radius: 5px;
+  box-shadow: 2px 2px 6px -4px #999;
+  cursor: default;
+  font-size: 14px;
+  left: 62px;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 20px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  white-space: nowrap;
+  z-index: 12;
+  transition: 0.15s ease all;
+}
+
+.apexcharts-tooltip.apexcharts-active {
+  opacity: 1;
+  transition: 0.15s ease all;
+}
+
+.apexcharts-tooltip.apexcharts-theme-light {
+  border: 1px solid #e3e3e3;
+  background: rgba(255, 255, 255, 0.96);
+}
+
+.apexcharts-tooltip.apexcharts-theme-dark {
+  color: #fff;
+  background: rgba(30, 30, 30, 0.8);
+}
+
+.apexcharts-tooltip * {
+  font-family: inherit;
+}
+
+
+.apexcharts-tooltip-title {
+  padding: 6px;
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+.apexcharts-tooltip.apexcharts-theme-light .apexcharts-tooltip-title {
+  background: #ECEFF1;
+  border-bottom: 1px solid #ddd;
+}
+
+.apexcharts-tooltip.apexcharts-theme-dark .apexcharts-tooltip-title {
+  background: rgba(0, 0, 0, 0.7);
+  border-bottom: 1px solid #333;
+}
+
+.apexcharts-tooltip-text-y-value,
+.apexcharts-tooltip-text-goals-value,
+.apexcharts-tooltip-text-z-value {
+  display: inline-block;
+  font-weight: 600;
+  margin-left: 5px;
+}
+
+.apexcharts-tooltip-title:empty,
+.apexcharts-tooltip-text-y-label:empty,
+.apexcharts-tooltip-text-y-value:empty,
+.apexcharts-tooltip-text-goals-label:empty,
+.apexcharts-tooltip-text-goals-value:empty,
+.apexcharts-tooltip-text-z-value:empty {
+  display: none;
+}
+
+.apexcharts-tooltip-text-y-value,
+.apexcharts-tooltip-text-goals-value,
+.apexcharts-tooltip-text-z-value {
+  font-weight: 600;
+}
+
+.apexcharts-tooltip-text-goals-label,
+.apexcharts-tooltip-text-goals-value {
+  padding: 6px 0 5px;
+}
+
+.apexcharts-tooltip-goals-group,
+.apexcharts-tooltip-text-goals-label,
+.apexcharts-tooltip-text-goals-value {
+  display: flex;
+}
+.apexcharts-tooltip-text-goals-label:not(:empty),
+.apexcharts-tooltip-text-goals-value:not(:empty) {
+  margin-top: -6px;
+}
+
+.apexcharts-tooltip-marker {
+  width: 12px;
+  height: 12px;
+  position: relative;
+  top: 0px;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+
+.apexcharts-tooltip-series-group {
+  padding: 0 10px;
+  display: none;
+  text-align: left;
+  justify-content: left;
+  align-items: center;
+}
+
+.apexcharts-tooltip-series-group.apexcharts-active .apexcharts-tooltip-marker {
+  opacity: 1;
+}
+
+.apexcharts-tooltip-series-group.apexcharts-active,
+.apexcharts-tooltip-series-group:last-child {
+  padding-bottom: 4px;
+}
+
+.apexcharts-tooltip-series-group-hidden {
+  opacity: 0;
+  height: 0;
+  line-height: 0;
+  padding: 0 !important;
+}
+
+.apexcharts-tooltip-y-group {
+  padding: 6px 0 5px;
+}
+
+.apexcharts-tooltip-box, .apexcharts-custom-tooltip {
+  padding: 4px 8px;
+}
+
+.apexcharts-tooltip-boxPlot {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.apexcharts-tooltip-box>div {
+  margin: 4px 0;
+}
+
+.apexcharts-tooltip-box span.value {
+  font-weight: bold;
+}
+
+.apexcharts-tooltip-rangebar {
+  padding: 5px 8px;
+}
+
+.apexcharts-tooltip-rangebar .category {
+  font-weight: 600;
+  color: #777;
+}
+
+.apexcharts-tooltip-rangebar .series-name {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.apexcharts-xaxistooltip {
+  opacity: 0;
+  padding: 9px 10px;
+  pointer-events: none;
+  color: #373d3f;
+  font-size: 13px;
+  text-align: center;
+  border-radius: 2px;
+  position: absolute;
+  z-index: 10;
+  background: #ECEFF1;
+  border: 1px solid #90A4AE;
+  transition: 0.15s ease all;
+}
+
+.apexcharts-xaxistooltip.apexcharts-theme-dark {
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  color: #fff;
+}
+
+.apexcharts-xaxistooltip:after,
+.apexcharts-xaxistooltip:before {
+  left: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.apexcharts-xaxistooltip:after {
+  border-color: rgba(236, 239, 241, 0);
+  border-width: 6px;
+  margin-left: -6px;
+}
+
+.apexcharts-xaxistooltip:before {
+  border-color: rgba(144, 164, 174, 0);
+  border-width: 7px;
+  margin-left: -7px;
+}
+
+.apexcharts-xaxistooltip-bottom:after,
+.apexcharts-xaxistooltip-bottom:before {
+  bottom: 100%;
+}
+
+.apexcharts-xaxistooltip-top:after,
+.apexcharts-xaxistooltip-top:before {
+  top: 100%;
+}
+
+.apexcharts-xaxistooltip-bottom:after {
+  border-bottom-color: #ECEFF1;
+}
+
+.apexcharts-xaxistooltip-bottom:before {
+  border-bottom-color: #90A4AE;
+}
+
+.apexcharts-xaxistooltip-bottom.apexcharts-theme-dark:after {
+  border-bottom-color: rgba(0, 0, 0, 0.5);
+}
+
+.apexcharts-xaxistooltip-bottom.apexcharts-theme-dark:before {
+  border-bottom-color: rgba(0, 0, 0, 0.5);
+}
+
+.apexcharts-xaxistooltip-top:after {
+  border-top-color: #ECEFF1
+}
+
+.apexcharts-xaxistooltip-top:before {
+  border-top-color: #90A4AE;
+}
+
+.apexcharts-xaxistooltip-top.apexcharts-theme-dark:after {
+  border-top-color: rgba(0, 0, 0, 0.5);
+}
+
+.apexcharts-xaxistooltip-top.apexcharts-theme-dark:before {
+  border-top-color: rgba(0, 0, 0, 0.5);
+}
+
+.apexcharts-xaxistooltip.apexcharts-active {
+  opacity: 1;
+  transition: 0.15s ease all;
+}
+
+.apexcharts-yaxistooltip {
+  opacity: 0;
+  padding: 4px 10px;
+  pointer-events: none;
+  color: #373d3f;
+  font-size: 13px;
+  text-align: center;
+  border-radius: 2px;
+  position: absolute;
+  z-index: 10;
+  background: #ECEFF1;
+  border: 1px solid #90A4AE;
+}
+
+.apexcharts-yaxistooltip.apexcharts-theme-dark {
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  color: #fff;
+}
+
+.apexcharts-yaxistooltip:after,
+.apexcharts-yaxistooltip:before {
+  top: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.apexcharts-yaxistooltip:after {
+  border-color: rgba(236, 239, 241, 0);
+  border-width: 6px;
+  margin-top: -6px;
+}
+
+.apexcharts-yaxistooltip:before {
+  border-color: rgba(144, 164, 174, 0);
+  border-width: 7px;
+  margin-top: -7px;
+}
+
+.apexcharts-yaxistooltip-left:after,
+.apexcharts-yaxistooltip-left:before {
+  left: 100%;
+}
+
+.apexcharts-yaxistooltip-right:after,
+.apexcharts-yaxistooltip-right:before {
+  right: 100%;
+}
+
+.apexcharts-yaxistooltip-left:after {
+  border-left-color: #ECEFF1;
+}
+
+.apexcharts-yaxistooltip-left:before {
+  border-left-color: #90A4AE;
+}
+
+.apexcharts-yaxistooltip-left.apexcharts-theme-dark:after {
+  border-left-color: rgba(0, 0, 0, 0.5);
+}
+
+.apexcharts-yaxistooltip-left.apexcharts-theme-dark:before {
+  border-left-color: rgba(0, 0, 0, 0.5);
+}
+
+.apexcharts-yaxistooltip-right:after {
+  border-right-color: #ECEFF1;
+}
+
+.apexcharts-yaxistooltip-right:before {
+  border-right-color: #90A4AE;
+}
+
+.apexcharts-yaxistooltip-right.apexcharts-theme-dark:after {
+  border-right-color: rgba(0, 0, 0, 0.5);
+}
+
+.apexcharts-yaxistooltip-right.apexcharts-theme-dark:before {
+  border-right-color: rgba(0, 0, 0, 0.5);
+}
+
+.apexcharts-yaxistooltip.apexcharts-active {
+  opacity: 1;
+}
+
+.apexcharts-yaxistooltip-hidden {
+  display: none;
+}
+
+.apexcharts-xcrosshairs,
+.apexcharts-ycrosshairs {
+  pointer-events: none;
+  opacity: 0;
+  transition: 0.15s ease all;
+}
+
+.apexcharts-xcrosshairs.apexcharts-active,
+.apexcharts-ycrosshairs.apexcharts-active {
+  opacity: 1;
+  transition: 0.15s ease all;
+}
+
+.apexcharts-ycrosshairs-hidden {
+  opacity: 0;
+}
+
+.apexcharts-selection-rect {
+  cursor: move;
+}
+
+.svg_select_boundingRect, .svg_select_points_rot {
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+}
+.apexcharts-selection-rect + g .svg_select_boundingRect,
+.apexcharts-selection-rect + g .svg_select_points_rot {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.apexcharts-selection-rect + g .svg_select_points_l,
+.apexcharts-selection-rect + g .svg_select_points_r {
+  cursor: ew-resize;
+  opacity: 1;
+  visibility: visible;
+}
+
+.svg_select_points {
+  fill: #efefef;
+  stroke: #333;
+  rx: 2;
+}
+
+.apexcharts-svg.apexcharts-zoomable.hovering-zoom {
+  cursor: crosshair
+}
+
+.apexcharts-svg.apexcharts-zoomable.hovering-pan {
+  cursor: move
+}
+
+.apexcharts-zoom-icon,
+.apexcharts-zoomin-icon,
+.apexcharts-zoomout-icon,
+.apexcharts-reset-icon,
+.apexcharts-pan-icon,
+.apexcharts-selection-icon,
+.apexcharts-menu-icon,
+.apexcharts-toolbar-custom-icon {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  line-height: 24px;
+  color: #6E8192;
+  text-align: center;
+}
+
+.apexcharts-zoom-icon svg,
+.apexcharts-zoomin-icon svg,
+.apexcharts-zoomout-icon svg,
+.apexcharts-reset-icon svg,
+.apexcharts-menu-icon svg {
+  fill: #6E8192;
+}
+
+.apexcharts-selection-icon svg {
+  fill: #444;
+  transform: scale(0.76)
+}
+
+.apexcharts-theme-dark .apexcharts-zoom-icon svg,
+.apexcharts-theme-dark .apexcharts-zoomin-icon svg,
+.apexcharts-theme-dark .apexcharts-zoomout-icon svg,
+.apexcharts-theme-dark .apexcharts-reset-icon svg,
+.apexcharts-theme-dark .apexcharts-pan-icon svg,
+.apexcharts-theme-dark .apexcharts-selection-icon svg,
+.apexcharts-theme-dark .apexcharts-menu-icon svg,
+.apexcharts-theme-dark .apexcharts-toolbar-custom-icon svg {
+  fill: #f3f4f5;
+}
+
+.apexcharts-canvas .apexcharts-zoom-icon.apexcharts-selected svg,
+.apexcharts-canvas .apexcharts-selection-icon.apexcharts-selected svg,
+.apexcharts-canvas .apexcharts-reset-zoom-icon.apexcharts-selected svg {
+  fill: #008FFB;
+}
+
+.apexcharts-theme-light .apexcharts-selection-icon:not(.apexcharts-selected):hover svg,
+.apexcharts-theme-light .apexcharts-zoom-icon:not(.apexcharts-selected):hover svg,
+.apexcharts-theme-light .apexcharts-zoomin-icon:hover svg,
+.apexcharts-theme-light .apexcharts-zoomout-icon:hover svg,
+.apexcharts-theme-light .apexcharts-reset-icon:hover svg,
+.apexcharts-theme-light .apexcharts-menu-icon:hover svg {
+  fill: #333;
+}
+
+.apexcharts-selection-icon,
+.apexcharts-menu-icon {
+  position: relative;
+}
+
+.apexcharts-reset-icon {
+  margin-left: 5px;
+}
+
+.apexcharts-zoom-icon,
+.apexcharts-reset-icon,
+.apexcharts-menu-icon {
+  transform: scale(0.85);
+}
+
+.apexcharts-zoomin-icon,
+.apexcharts-zoomout-icon {
+  transform: scale(0.7)
+}
+
+.apexcharts-zoomout-icon {
+  margin-right: 3px;
+}
+
+.apexcharts-pan-icon {
+  transform: scale(0.62);
+  position: relative;
+  left: 1px;
+  top: 0px;
+}
+
+.apexcharts-pan-icon svg {
+  fill: #fff;
+  stroke: #6E8192;
+  stroke-width: 2;
+}
+
+.apexcharts-pan-icon.apexcharts-selected svg {
+  stroke: #008FFB;
+}
+
+.apexcharts-pan-icon:not(.apexcharts-selected):hover svg {
+  stroke: #333;
+}
+
+.apexcharts-toolbar {
+  position: absolute;
+  z-index: 11;
+  max-width: 176px;
+  text-align: right;
+  border-radius: 3px;
+  padding: 0px 6px 2px 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.apexcharts-menu {
+  background: #fff;
+  position: absolute;
+  top: 100%;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  padding: 3px;
+  right: 10px;
+  opacity: 0;
+  min-width: 110px;
+  transition: 0.15s ease all;
+  pointer-events: none;
+}
+
+.apexcharts-menu.apexcharts-menu-open {
+  opacity: 1;
+  pointer-events: all;
+  transition: 0.15s ease all;
+}
+
+.apexcharts-menu-item {
+  padding: 6px 7px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.apexcharts-theme-light .apexcharts-menu-item:hover {
+  background: #eee;
+}
+
+.apexcharts-theme-dark .apexcharts-menu {
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+}
+
+@media screen and (min-width: 768px) {
+  .apexcharts-canvas:hover .apexcharts-toolbar {
+    opacity: 1;
+  }
+}
+
+.apexcharts-datalabel.apexcharts-element-hidden {
+  opacity: 0;
+}
+
+.apexcharts-pie-label,
+.apexcharts-datalabels,
+.apexcharts-datalabel,
+.apexcharts-datalabel-label,
+.apexcharts-datalabel-value {
+  cursor: default;
+  pointer-events: none;
+}
+
+.apexcharts-pie-label-delay {
+  opacity: 0;
+  animation-name: opaque;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease;
+}
+
+.apexcharts-canvas .apexcharts-element-hidden {
+  opacity: 0;
+}
+
+.apexcharts-hide .apexcharts-series-points {
+  opacity: 0;
+}
+
+.apexcharts-gridline,
+.apexcharts-annotation-rect,
+.apexcharts-tooltip .apexcharts-marker,
+.apexcharts-area-series .apexcharts-area,
+.apexcharts-line,
+.apexcharts-zoom-rect,
+.apexcharts-toolbar svg,
+.apexcharts-area-series .apexcharts-series-markers .apexcharts-marker.no-pointer-events,
+.apexcharts-line-series .apexcharts-series-markers .apexcharts-marker.no-pointer-events,
+.apexcharts-radar-series path,
+.apexcharts-radar-series polygon {
+  pointer-events: none;
+}
+
+
+/* markers */
+
+.apexcharts-marker {
+  transition: 0.15s ease all;
+}
+
+@keyframes opaque {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
+/* Resize generated styles */
+
+@keyframes resizeanim {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.resize-triggers {
+  animation: 1ms resizeanim;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.resize-triggers,
+.resize-triggers>div,
+.contract-trigger:before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.resize-triggers>div {
+  background: #eee;
+  overflow: auto;
+}
+
+.contract-trigger:before {
+  width: 200%;
+  height: 200%;
+}
+
+
+
+
+
+        </style>
+    </head>
+    <body class=""
+          data-layout="{&quot;mode&quot;: &quot;dark&quot;, &quot;width&quot;: &quot;fluid&quot;, &quot;menuPosition&quot;: &quot;fixed&quot;, &quot;sidebar&quot;: { &quot;color&quot;: &quot;light&quot;, &quot;size&quot;: &quot;default&quot;, &quot;showuser&quot;: false}, &quot;topbar&quot;: {&quot;color&quot;: &quot;dark&quot;}, &quot;showRightSidebarOnPageLoad&quot;: true}"
+          data-sidebar-size="default" data-sidebar-color="light" data-layout-width="fluid"
+          data-layout-menu-position="fixed" data-sidebar-showuser="false" data-topbar-color="dark">
+
+        <!-- Begin page -->
+        <div id="wrapper">
+
+            <!-- Topbar Start -->
+            <div class="navbar-custom">
+                <div class="container-fluid">
+
+                    <ul class="list-unstyled topnav-menu float-end mb-0">
+
+                        <li class="d-none d-lg-block">
+                            <form class="app-search">
+                                <div class="app-search-box dropdown">
+                                    <div class="input-group">
+                                        <input type="search" class="form-control" placeholder="Search..."
+                                               id="top-search">
+
+                                        <button class="btn" type="submit">
+                                            <i class="fe-search"></i>
+                                        </button>
+                                    </div>
+                                    <div class="dropdown-menu dropdown-lg" id="search-dropdown">
+                                        <!-- item-->
+                                        <div class="dropdown-header noti-title">
+                                            <h5 class="text-overflow mb-2">Found <span class="text-danger">09</span>
+                                                results</h5>
+                                        </div>
+
+                                        <!-- item-->
+                                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                            <i class="fe-home me-1"></i>
+                                            <span>Analytics Report</span>
+                                        </a>
+
+                                        <!-- item-->
+                                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                            <i class="fe-aperture me-1"></i>
+                                            <span>How can I help you?</span>
+                                        </a>
+
+                                        <!-- item-->
+                                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                            <i class="fe-settings me-1"></i>
+                                            <span>User profile settings</span>
+                                        </a>
+
+                                        <!-- item-->
+                                        <div class="dropdown-header noti-title">
+                                            <h6 class="text-overflow mb-2 text-uppercase">Users</h6>
+                                        </div>
+
+                                        <div class="notification-list">
+                                            <!-- item-->
+                                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                                <div class="d-flex">
+                                                    <img class="d-flex me-2 rounded-circle"
+                                                         src="./Sales Dashboard _ Minton - Admin &amp; Dashboard Template_files/avatar-2.jpg"
+                                                         alt="Generic placeholder image" height="32">
+                                                    <div>
+                                                        <h5 class="m-0 font-14">Erwin E. Brown</h5>
+                                                        <span class="font-12 mb-0">UI Designer</span>
+                                                    </div>
+                                                </div>
+                                            </a>
+
+                                            <!-- item-->
+                                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                                <div class="d-flex">
+                                                    <img class="d-flex me-2 rounded-circle"
+                                                         src="./Sales Dashboard _ Minton - Admin &amp; Dashboard Template_files/avatar-5.jpg"
+                                                         alt="Generic placeholder image" height="32">
+                                                    <div>
+                                                        <h5 class="m-0 font-14">Jacob Deo</h5>
+                                                        <span class="font-12 mb-0">Developer</span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </form>
+                        </li>
+
+                        <li class="dropdown d-inline-block d-lg-none">
+                            <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light"
+                               data-bs-toggle="dropdown"
+                               href="https://coderthemes.com/minton/layouts/default/index-dark.html#" role="button"
+                               aria-haspopup="false" aria-expanded="false">
+                                <i class="fe-search noti-icon"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-lg dropdown-menu-end p-0">
+                                <form class="p-3">
+                                    <input type="text" class="form-control" placeholder="Search ..."
+                                           aria-label="Search">
+                                </form>
+                            </div>
+                        </li>
+
+                        <li class="dropdown d-none d-lg-inline-block">
+                            <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light"
+                               data-toggle="fullscreen"
+                               href="https://coderthemes.com/minton/layouts/default/index-dark.html#">
+                                <i class="fe-maximize noti-icon"></i>
+                            </a>
+                        </li>
+
+                        <li class="dropdown d-none d-lg-inline-block topbar-dropdown">
+                            <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light"
+                               data-bs-toggle="dropdown"
+                               href="https://coderthemes.com/minton/layouts/default/index-dark.html#" role="button"
+                               aria-haspopup="false" aria-expanded="false">
+                                <i class="fe-grid noti-icon"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-lg dropdown-menu-end p-0">
+
+                                <div class="p-2">
+                                    <div class="row g-0">
+                                        <div class="col">
+                                            <a class="dropdown-icon-item"
+                                               href="https://coderthemes.com/minton/layouts/default/index-dark.html#">
+                                                <img src="./Sales Dashboard _ Minton - Admin &amp; Dashboard Template_files/github.png"
+                                                     alt="Github">
+                                                <span>GitHub</span>
+                                            </a>
+                                        </div>
+                                        <div class="col">
+                                            <a class="dropdown-icon-item"
+                                               href="https://coderthemes.com/minton/layouts/default/index-dark.html#">
+                                                <img src="./Sales Dashboard _ Minton - Admin &amp; Dashboard Template_files/dribbble.png"
+                                                     alt="dribbble">
+                                                <span>Dribbble</span>
+                                            </a>
+                                        </div>
+                                        <div class="col">
+                                            <a class="dropdown-icon-item"
+                                               href="https://coderthemes.com/minton/layouts/default/index-dark.html#">
+                                                <img src="./Sales Dashboard _ Minton - Admin &amp; Dashboard Template_files/slack.png"
+                                                     alt="slack">
+                                                <span>Slack</span>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="row g-0">
+                                        <div class="col">
+                                            <a class="dropdown-icon-item"
+                                               href="https://coderthemes.com/minton/layouts/default/index-dark.html#">
+                                                <img src="./Sales Dashboard _ Minton - Admin &amp; Dashboard Template_files/g-suite.png"
+                                                     alt="G Suite">
+                                                <span>G Suite</span>
+                                            </a>
+                                        </div>
+                                        <div class="col">
+                                            <a class="dropdown-icon-item"
+                                               href="https://coderthemes.com/minton/layouts/default/index-dark.html#">
+                                                <img src="./Sales Dashboard _ Minton - Admin &amp; Dashboard Template_files/bitbucket.png"
+                                                     alt="bitbucket">
+                                                <span>Bitbucket</span>
+                                            </a>
+                                        </div>
+                                        <div class="col">
+                                            <a class="dropdown-icon-item"
+                                               href="https://coderthemes.com/minton/layouts/default/index-dark.html#">
+                                                <img src="./Sales Dashboard _ Minton - Admin &amp; Dashboard Template_files/dropbox.png"
+                                                     alt="dropbox">
+                                                <span>Dropbox</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </li>
+
+                        <li class="dropdown d-none d-lg-inline-block topbar-dropdown">
+                            <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light"
+                               data-bs-toggle="dropdown"
+                               href="https://coderthemes.com/minton/layouts/default/index-dark.html#" role="button"
+                               aria-haspopup="false" aria-expanded="false">
+                                <img src="./Sales Dashboard _ Minton - Admin &amp; Dashboard Template_files/us.jpg"
+                                     alt="user-image" height="14">
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end">
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item">
+                                    <img src="./Sales Dashboard _ Minton - Admin &amp; Dashboard Template_files/germany.jpg"
+                                         alt="user-image" class="me-1" height="12"> <span
+                                        class="align-middle">German</span>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item">
+                                    <img src="./Sales Dashboard _ Minton - Admin &amp; Dashboard Template_files/italy.jpg"
+                                         alt="user-image" class="me-1" height="12"> <span
+                                        class="align-middle">Italian</span>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item">
+                                    <img src="./Sales Dashboard _ Minton - Admin &amp; Dashboard Template_files/spain.jpg"
+                                         alt="user-image" class="me-1" height="12"> <span
+                                        class="align-middle">Spanish</span>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item">
+                                    <img src="./Sales Dashboard _ Minton - Admin &amp; Dashboard Template_files/russia.jpg"
+                                         alt="user-image" class="me-1" height="12"> <span
+                                        class="align-middle">Russian</span>
+                                </a>
+
+                            </div>
+                        </li>
+
+                        <li class="dropdown notification-list topbar-dropdown">
+                            <a class="nav-link dropdown-toggle waves-effect waves-light" data-bs-toggle="dropdown"
+                               href="https://coderthemes.com/minton/layouts/default/index-dark.html#" role="button"
+                               aria-haspopup="false" aria-expanded="false">
+                                <i class="fe-bell noti-icon"></i>
+                                <span class="badge bg-danger rounded-circle noti-icon-badge">5</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end dropdown-lg">
+
+                                <!-- item-->
+                                <div class="dropdown-item noti-title">
+                                    <h5 class="m-0">
+                                        <span class="float-end">
+                                            <a href="https://coderthemes.com/minton/layouts/default/index-dark.html"
+                                               class="text-dark">
+                                                <small>Clear All</small>
+                                            </a>
+                                        </span>Notification
+                                    </h5>
+                                </div>
+
+                                <div class="noti-scroll" data-simplebar="init">
+                                    <div class="simplebar-wrapper" style="margin: 0px;">
+                                        <div class="simplebar-height-auto-observer-wrapper">
+                                            <div class="simplebar-height-auto-observer"></div>
+                                        </div>
+                                        <div class="simplebar-mask">
+                                            <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
+                                                <div class="simplebar-content-wrapper"
+                                                     style="height: auto; overflow: hidden;">
+                                                    <div class="simplebar-content" style="padding: 0px;">
+
+                                                        <!-- item-->
+                                                        <a href="javascript:void(0);"
+                                                           class="dropdown-item notify-item active">
+                                                            <div class="notify-icon bg-soft-primary text-primary">
+                                                                <i class="mdi mdi-comment-account-outline"></i>
+                                                            </div>
+                                                            <p class="notify-details">Doug Dukes commented on Admin
+                                                                Dashboard
+                                                                <small class="text-muted">1 min ago</small>
+                                                            </p>
+                                                        </a>
+
+                                                        <!-- item-->
+                                                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                                            <div class="notify-icon">
+                                                                <img src="./Sales Dashboard _ Minton - Admin &amp; Dashboard Template_files/avatar-2.jpg"
+                                                                     class="img-fluid rounded-circle" alt=""></div>
+                                                            <p class="notify-details">Mario Drummond</p>
+                                                            <p class="text-muted mb-0 user-msg">
+                                                                <small>Hi, How are you? What about our next
+                                                                    meeting</small>
+                                                            </p>
+                                                        </a>
+
+                                                        <!-- item-->
+                                                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                                            <div class="notify-icon">
+                                                                <img src="./Sales Dashboard _ Minton - Admin &amp; Dashboard Template_files/avatar-4.jpg"
+                                                                     class="img-fluid rounded-circle" alt=""></div>
+                                                            <p class="notify-details">Karen Robinson</p>
+                                                            <p class="text-muted mb-0 user-msg">
+                                                                <small>Wow ! this admin looks good and awesome
+                                                                    design</small>
+                                                            </p>
+                                                        </a>
+
+                                                        <!-- item-->
+                                                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                                            <div class="notify-icon bg-soft-warning text-warning">
+                                                                <i class="mdi mdi-account-plus"></i>
+                                                            </div>
+                                                            <p class="notify-details">New user registered.
+                                                                <small class="text-muted">5 hours ago</small>
+                                                            </p>
+                                                        </a>
+
+                                                        <!-- item-->
+                                                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                                            <div class="notify-icon bg-info">
+                                                                <i class="mdi mdi-comment-account-outline"></i>
+                                                            </div>
+                                                            <p class="notify-details">Caleb Flakelar commented on Admin
+                                                                <small class="text-muted">4 days ago</small>
+                                                            </p>
+                                                        </a>
+
+                                                        <!-- item-->
+                                                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                                            <div class="notify-icon bg-secondary">
+                                                                <i class="mdi mdi-heart"></i>
+                                                            </div>
+                                                            <p class="notify-details">Carlos Crouch liked
+                                                                <b>Admin</b>
+                                                                <small class="text-muted">13 days ago</small>
+                                                            </p>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="simplebar-placeholder" style="width: 0px; height: 0px;"></div>
+                                    </div>
+                                    <div class="simplebar-track simplebar-horizontal" style="visibility: hidden;">
+                                        <div class="simplebar-scrollbar" style="width: 0px; display: none;"></div>
+                                    </div>
+                                    <div class="simplebar-track simplebar-vertical" style="visibility: hidden;">
+                                        <div class="simplebar-scrollbar" style="height: 0px; display: none;"></div>
+                                    </div>
+                                </div>
+
+                                <!-- All-->
+                                <a href="javascript:void(0);"
+                                   class="dropdown-item text-center text-primary notify-item notify-all">
+                                    View all
+                                    <i class="fe-arrow-right"></i>
+                                </a>
+
+                            </div>
+                        </li>
+
+                        <li class="dropdown notification-list topbar-dropdown">
+                            <a class="nav-link dropdown-toggle nav-user me-0 waves-effect waves-light"
+                               data-bs-toggle="dropdown"
+                               href="https://coderthemes.com/minton/layouts/default/index-dark.html#" role="button"
+                               aria-haspopup="false" aria-expanded="false">
+                                <img src="./Sales Dashboard _ Minton - Admin &amp; Dashboard Template_files/avatar-1.jpg"
+                                     alt="user-image" class="rounded-circle">
+                                <span class="pro-user-name ms-1">
+                                    Nik Patel <i class="mdi mdi-chevron-down"></i>
+                                </span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end profile-dropdown ">
+                                <!-- item-->
+                                <div class="dropdown-header noti-title">
+                                    <h6 class="text-overflow m-0">Welcome !</h6>
+                                </div>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <i class="ri-account-circle-line"></i>
+                                    <span>My Account</span>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <i class="ri-settings-3-line"></i>
+                                    <span>Settings</span>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <i class="ri-wallet-line"></i>
+                                    <span>My Wallet <span class="badge bg-success float-end">3</span> </span>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <i class="ri-lock-line"></i>
+                                    <span>Lock Screen</span>
+                                </a>
+
+                                <div class="dropdown-divider"></div>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <i class="ri-logout-box-line"></i>
+                                    <span>Logout</span>
+                                </a>
+
+                            </div>
+                        </li>
+
+                        <li class="dropdown notification-list">
+                            <a href="javascript:void(0);" class="nav-link right-bar-toggle waves-effect waves-light">
+                                <i class="fe-settings noti-icon"></i>
+                            </a>
+                        </li>
+
+                    </ul>
+
+                    <!-- LOGO -->
+                    <div class="logo-box">
+                        <a href="https://coderthemes.com/minton/layouts/default/index.html"
+                           class="logo logo-dark text-center">
+                            <span class="logo-sm">
+                                <img src="./Sales Dashboard _ Minton - Admin &amp; Dashboard Template_files/logo-sm-dark.png"
+                                     alt="" height="24">
+                                <!-- <span class="logo-lg-text-light">Minton</span> -->
+                            </span>
+                            <span class="logo-lg">
+                                <img src="./Sales Dashboard _ Minton - Admin &amp; Dashboard Template_files/logo-dark.png"
+                                     alt="" height="20">
+                                <!-- <span class="logo-lg-text-light">M</span> -->
+                            </span>
+                        </a>
+
+                        <a href="https://coderthemes.com/minton/layouts/default/index.html"
+                           class="logo logo-light text-center">
+                            <span class="logo-sm">
+                                <img src="./Sales Dashboard _ Minton - Admin &amp; Dashboard Template_files/logo-sm.png"
+                                     alt="" height="24">
+                            </span>
+                            <span class="logo-lg">
+                                <img src="./Sales Dashboard _ Minton - Admin &amp; Dashboard Template_files/logo-light.png"
+                                     alt="" height="20">
+                            </span>
+                        </a>
+                    </div>
+
+                    <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
+                        <li>
+                            <button class="button-menu-mobile waves-effect waves-light">
+                                <i class="fe-menu"></i>
+                            </button>
+                        </li>
+
+                        <li>
+                            <!-- Mobile menu toggle (Horizontal Layout)-->
+                            <a class="navbar-toggle nav-link" data-bs-toggle="collapse"
+                               data-bs-target="#topnav-menu-content">
+                                <div class="lines">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                            </a>
+                            <!-- End mobile menu toggle-->
+                        </li>
+
+                        <li class="dropdown d-none d-xl-block">
+                            <a class="nav-link dropdown-toggle waves-effect waves-light" data-bs-toggle="dropdown"
+                               href="https://coderthemes.com/minton/layouts/default/index-dark.html#" role="button"
+                               aria-haspopup="false" aria-expanded="false">
+                                Create New
+                                <i class="mdi mdi-chevron-down"></i>
+                            </a>
+                            <div class="dropdown-menu">
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item">
+                                    <i class="fe-briefcase me-1"></i>
+                                    <span>New Projects</span>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item">
+                                    <i class="fe-user me-1"></i>
+                                    <span>Create Users</span>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item">
+                                    <i class="fe-bar-chart-line- me-1"></i>
+                                    <span>Revenue Report</span>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item">
+                                    <i class="fe-settings me-1"></i>
+                                    <span>Settings</span>
+                                </a>
+
+                                <div class="dropdown-divider"></div>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item">
+                                    <i class="fe-headphones me-1"></i>
+                                    <span>Help &amp; Support</span>
+                                </a>
+
+                            </div>
+                        </li>
+
+                        <li class="dropdown dropdown-mega d-none d-xl-block">
+                            <a class="nav-link dropdown-toggle waves-effect waves-light" data-bs-toggle="dropdown"
+                               href="https://coderthemes.com/minton/layouts/default/index-dark.html#" role="button"
+                               aria-haspopup="false" aria-expanded="false">
+                                Mega Menu
+                                <i class="mdi mdi-chevron-down"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-megamenu">
+                                <div class="row">
+                                    <div class="col-sm-8">
+
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <h5 class="text-dark mt-0">UI Components</h5>
+                                                <ul class="list-unstyled megamenu-list">
+                                                    <li>
+                                                        <a href="javascript:void(0);">Widgets</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);">Nestable List</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);">Range Sliders</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);">Masonry Items</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);">Sweet Alerts</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);">Treeview Page</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);">Tour Page</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <h5 class="text-dark mt-0">Applications</h5>
+                                                <ul class="list-unstyled megamenu-list">
+                                                    <li>
+                                                        <a href="javascript:void(0);">eCommerce Pages</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);">CRM Pages</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);">Email</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);">Calendar</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);">Team Contacts</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);">Task Board</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);">Email Templates</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <h5 class="text-dark mt-0">Extra Pages</h5>
+                                                <ul class="list-unstyled megamenu-list">
+                                                    <li>
+                                                        <a href="javascript:void(0);">Left Sidebar with User</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);">Menu Collapsed</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);">Small Left Sidebar</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);">New Header Style</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);">Search Result</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);">Gallery Pages</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);">Maintenance &amp; Coming Soon</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="text-center mt-3">
+                                            <h3 class="text-dark">Special Discount Sale!</h3>
+                                            <h4>Save up to 70% off.</h4>
+                                            <button class="btn btn-primary rounded-pill mt-3">Download Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <!-- end Topbar -->
+
+            <!-- ========== Left Sidebar Start ========== -->
+            <div class="left-side-menu">
+
+                <!-- LOGO -->
+                <div class="logo-box">
+                    <a href="https://coderthemes.com/minton/layouts/default/index.html"
+                       class="logo logo-dark text-center">
+                        <span class="logo-sm">
+                            <img src="./Sales Dashboard _ Minton - Admin &amp; Dashboard Template_files/logo-sm-dark.png"
+                                 alt="" height="24">
+                            <!-- <span class="logo-lg-text-light">Minton</span> -->
+                        </span>
+                        <span class="logo-lg">
+                            <img src="./Sales Dashboard _ Minton - Admin &amp; Dashboard Template_files/logo-dark.png"
+                                 alt="" height="20">
+                            <!-- <span class="logo-lg-text-light">M</span> -->
+                        </span>
+                    </a>
+
+                    <a href="https://coderthemes.com/minton/layouts/default/index.html"
+                       class="logo logo-light text-center">
+                        <span class="logo-sm">
+                            <img src="./Sales Dashboard _ Minton - Admin &amp; Dashboard Template_files/logo-sm.png"
+                                 alt="" height="24">
+                        </span>
+                        <span class="logo-lg">
+                            <img src="./Sales Dashboard _ Minton - Admin &amp; Dashboard Template_files/logo-light.png"
+                                 alt="" height="20">
+                        </span>
+                    </a>
+                </div>
+
+                <div class="h-100" data-simplebar="init">
+                    <div class="simplebar-wrapper" style="margin: 0px;">
+                        <div class="simplebar-height-auto-observer-wrapper">
+                            <div class="simplebar-height-auto-observer"></div>
+                        </div>
+                        <div class="simplebar-mask">
+                            <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
+                                <div class="simplebar-content-wrapper" style="height: 100%; overflow: hidden scroll;">
+                                    <div class="simplebar-content" style="padding: 0px;">
+
+                                        <!-- User box -->
+                                        <div class="user-box text-center">
+                                            <img src="./Sales Dashboard _ Minton - Admin &amp; Dashboard Template_files/avatar-1.jpg"
+                                                 alt="user-img" title="Mat Helme" class="rounded-circle avatar-md">
+                                            <div class="dropdown">
+                                                <a href="https://coderthemes.com/minton/layouts/default/index-dark.html#"
+                                                   class="text-reset dropdown-toggle h5 mt-2 mb-1 d-block"
+                                                   data-bs-toggle="dropdown">Nik Patel</a>
+                                                <div class="dropdown-menu user-pro-dropdown">
+
+                                                    <!-- item-->
+                                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                                        <i class="fe-user me-1"></i>
+                                                        <span>My Account</span>
+                                                    </a>
+
+                                                    <!-- item-->
+                                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                                        <i class="fe-settings me-1"></i>
+                                                        <span>Settings</span>
+                                                    </a>
+
+                                                    <!-- item-->
+                                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                                        <i class="fe-lock me-1"></i>
+                                                        <span>Lock Screen</span>
+                                                    </a>
+
+                                                    <!-- item-->
+                                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                                        <i class="fe-log-out me-1"></i>
+                                                        <span>Logout</span>
+                                                    </a>
+
+                                                </div>
+                                            </div>
+                                            <p class="text-reset">Admin Head</p>
+                                        </div>
+
+                                        <!--- Sidemenu -->
+                                        <div id="sidebar-menu">
+
+                                            <ul id="side-menu">
+
+                                                <li class="menu-title">Navigation</li>
+
+                                                <li>
+                                                    <a href="https://coderthemes.com/minton/layouts/default/index-dark.html#sidebarDashboards"
+                                                       data-bs-toggle="collapse" aria-expanded="false"
+                                                       aria-controls="sidebarDashboards" class="waves-effect">
+                                                        <i class="ri-dashboard-line"></i>
+                                                        <span class="badge bg-success rounded-pill float-end">3</span>
+                                                        <span> Dashboards </span>
+                                                    </a>
+                                                    <div class="collapse" id="sidebarDashboards">
+                                                        <ul class="nav-second-level">
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/index.html">Sales</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/dashboard-crm.html">CRM</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/dashboard-analytics.html">Analytics</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+
+                                                <li>
+                                                    <a href="https://coderthemes.com/minton/layouts/default/index-dark.html#sidebarLayouts"
+                                                       data-bs-toggle="collapse" aria-expanded="false"
+                                                       aria-controls="sidebarLayouts">
+                                                        <i class="ri-layout-line"></i>
+                                                        <span> Layouts </span>
+                                                        <span class="menu-arrow"></span>
+                                                    </a>
+                                                    <div class="collapse" id="sidebarLayouts">
+                                                        <ul class="nav-second-level">
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/layouts-horizontal.html">Horizontal</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/layouts-detached.html">Detached</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/layouts-two-column.html">Two
+                                                                    Column Menu</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/layouts-preloader.html">Preloader</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+
+                                                <li class="menu-title mt-2">Apps</li>
+
+                                                <li>
+                                                    <a href="https://coderthemes.com/minton/layouts/default/apps-chat.html">
+                                                        <i class="ri-message-2-line"></i>
+                                                        <span> Chat </span>
+                                                    </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="https://coderthemes.com/minton/layouts/default/index-dark.html#sidebarEcommerce"
+                                                       data-bs-toggle="collapse" aria-expanded="false"
+                                                       aria-controls="sidebarEcommerce">
+                                                        <i class="ri-shopping-cart-2-line"></i>
+                                                        <span class="badge bg-danger float-end">New</span>
+                                                        <span> Ecommerce </span>
+                                                    </a>
+                                                    <div class="collapse" id="sidebarEcommerce">
+                                                        <ul class="nav-second-level">
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/ecommerce-products.html">Products
+                                                                    List</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/ecommerce-products-grid.html">Products
+                                                                    Grid</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/ecommerce-product-detail.html">Product
+                                                                    Detail</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/ecommerce-product-create.html">Create
+                                                                    Product</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/ecommerce-customers.html">Customers</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/ecommerce-orders.html">Orders</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/ecommerce-orders-detail.html">Order
+                                                                    Detail</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/ecommerce-sellers.html">Sellers</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/ecommerce-cart.html">Shopping
+                                                                    Cart</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/ecommerce-checkout.html">Checkout</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+
+                                                <li>
+                                                    <a href="https://coderthemes.com/minton/layouts/default/apps-calendar.html">
+                                                        <i class="ri-calendar-2-line"></i>
+                                                        <span> Calendar </span>
+                                                    </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="https://coderthemes.com/minton/layouts/default/index-dark.html#sidebarEmail"
+                                                       data-bs-toggle="collapse" aria-expanded="false"
+                                                       aria-controls="sidebarEmail">
+                                                        <i class="ri-mail-line"></i>
+                                                        <span> Email </span>
+                                                        <span class="menu-arrow"></span>
+                                                    </a>
+                                                    <div class="collapse" id="sidebarEmail">
+                                                        <ul class="nav-second-level">
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/email-inbox.html">Inbox</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/email-read.html">Read
+                                                                    Email</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/email-templates.html">Email
+                                                                    Templates</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+
+                                                <li>
+                                                    <a href="https://coderthemes.com/minton/layouts/default/apps-companies.html">
+                                                        <i class="ri-building-4-line"></i>
+                                                        <span> Companies </span>
+                                                    </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="https://coderthemes.com/minton/layouts/default/index-dark.html#sidebarTasks"
+                                                       data-bs-toggle="collapse" aria-expanded="false"
+                                                       aria-controls="sidebarTasks">
+                                                        <i class="ri-task-line"></i>
+                                                        <span> Tasks </span>
+                                                        <span class="menu-arrow"></span>
+                                                    </a>
+                                                    <div class="collapse" id="sidebarTasks">
+                                                        <ul class="nav-second-level">
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/task-list.html">List</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/task-details.html">Details</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/task-kanban-board.html">Kanban
+                                                                    Board</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+
+                                                <li>
+                                                    <a href="https://coderthemes.com/minton/layouts/default/apps-tickets.html">
+                                                        <i class="ri-customer-service-2-line"></i>
+                                                        <span> Tickets </span>
+                                                    </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="https://coderthemes.com/minton/layouts/default/index-dark.html#sidebarContacts"
+                                                       data-bs-toggle="collapse" aria-expanded="false"
+                                                       aria-controls="sidebarContacts">
+                                                        <i class="ri-profile-line"></i>
+                                                        <span> Contacts </span>
+                                                        <span class="menu-arrow"></span>
+                                                    </a>
+                                                    <div class="collapse" id="sidebarContacts">
+                                                        <ul class="nav-second-level">
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/contacts-list.html">Members
+                                                                    List</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/contacts-profile.html">Profile</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+
+                                                <li>
+                                                    <a href="https://coderthemes.com/minton/layouts/default/apps-file-manager.html">
+                                                        <i class="ri-folders-line"></i>
+                                                        <span> File Manager </span>
+                                                    </a>
+                                                </li>
+
+                                                <li class="menu-title mt-2">Custom</li>
+
+                                                <li>
+                                                    <a href="https://coderthemes.com/minton/layouts/default/index-dark.html#sidebarAuth"
+                                                       data-bs-toggle="collapse" aria-expanded="false"
+                                                       aria-controls="sidebarAuth">
+                                                        <i class="ri-shield-user-line"></i>
+                                                        <span> Auth Pages </span>
+                                                        <span class="menu-arrow"></span>
+                                                    </a>
+                                                    <div class="collapse" id="sidebarAuth">
+                                                        <ul class="nav-second-level">
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/auth-login.html">Log
+                                                                    In</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/auth-login-2.html">Log
+                                                                    In 2</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/auth-register.html">Register</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/auth-register-2.html">Register
+                                                                    2</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/auth-signin-signup.html">Signin
+                                                                    - Signup</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/auth-signin-signup-2.html">Signin
+                                                                    - Signup 2</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/auth-recoverpw.html">Recover
+                                                                    Password</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/auth-recoverpw-2.html">Recover
+                                                                    Password 2</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/auth-lock-screen.html">Lock
+                                                                    Screen</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/auth-lock-screen-2.html">Lock
+                                                                    Screen 2</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/auth-logout.html">Logout</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/auth-logout-2.html">Logout
+                                                                    2</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/auth-confirm-mail.html">Confirm
+                                                                    Mail</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/auth-confirm-mail-2.html">Confirm
+                                                                    Mail 2</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+
+                                                <li>
+                                                    <a href="https://coderthemes.com/minton/layouts/default/index-dark.html#sidebarExpages"
+                                                       data-bs-toggle="collapse" aria-expanded="false"
+                                                       aria-controls="sidebarExpages">
+                                                        <i class="ri-pages-line"></i>
+                                                        <span> Extra Pages </span>
+                                                        <span class="menu-arrow"></span>
+                                                    </a>
+                                                    <div class="collapse" id="sidebarExpages">
+                                                        <ul class="nav-second-level">
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/pages-starter.html">Starter</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/pages-timeline.html">Timeline</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/pages-sitemap.html">Sitemap</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/pages-invoice.html">Invoice</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/pages-faqs.html">FAQs</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/pages-search-results.html">Search
+                                                                    Results</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/pages-pricing.html">Pricing</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/pages-maintenance.html">Maintenance</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/pages-coming-soon.html">Coming
+                                                                    Soon</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/pages-gallery.html">Gallery</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/pages-404.html">Error
+                                                                    404</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/pages-404-alt.html">Error
+                                                                    404-alt</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/pages-500.html">Error
+                                                                    500</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+
+                                                <li class="menu-title mt-2">Components</li>
+
+                                                <li>
+                                                    <a href="https://coderthemes.com/minton/layouts/default/index-dark.html#sidebarBaseui"
+                                                       data-bs-toggle="collapse" aria-expanded="false"
+                                                       aria-controls="sidebarBaseui">
+                                                        <i class="ri-pencil-ruler-2-line"></i>
+                                                        <span> Base UI </span>
+                                                        <span class="menu-arrow"></span>
+                                                    </a>
+                                                    <div class="collapse" id="sidebarBaseui">
+                                                        <ul class="nav-second-level">
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/ui-avatars.html">Avatars</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/ui-buttons.html">Buttons</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/ui-cards.html">Cards</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/ui-carousel.html">Carousel</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/ui-dropdowns.html">Dropdowns</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/ui-video.html">Embed
+                                                                    Video</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/ui-general.html">General
+                                                                    UI</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/ui-grid.html">Grid</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/ui-images.html">Images</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/ui-list-group.html">List
+                                                                    Group</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/ui-modals.html">Modals</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/ui-notifications.html">Notifications</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/ui-offcanvas.html">Offcanvas</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/ui-placeholders.html">Placeholders</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/ui-portlets.html">Portlets</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/ui-progress.html">Progress</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/ui-ribbons.html">Ribbons</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/ui-spinners.html">Spinners</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/ui-tabs-accordions.html">Tabs
+                                                                    &amp; Accordions</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/ui-tooltips-popovers.html">Tooltips
+                                                                    &amp; Popovers</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/ui-typography.html">Typography</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+
+                                                <li>
+                                                    <a href="https://coderthemes.com/minton/layouts/default/index-dark.html#sidebarExtendedui"
+                                                       data-bs-toggle="collapse" aria-expanded="false"
+                                                       aria-controls="sidebarExtendedui">
+                                                        <i class="ri-stack-line"></i>
+                                                        <span class="badge bg-info float-end">Hot</span>
+                                                        <span> Extended UI </span>
+                                                    </a>
+                                                    <div class="collapse" id="sidebarExtendedui">
+                                                        <ul class="nav-second-level">
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/extended-nestable.html">Nestable
+                                                                    List</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/extended-range-slider.html">Range
+                                                                    Slider</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/extended-sweet-alert.html">Sweet
+                                                                    Alert</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/extended-tour.html">Tour
+                                                                    Page</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/extended-treeview.html">Treeview</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/extended-scrollspy.html">Scrollspy</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+
+                                                <li>
+                                                    <a href="https://coderthemes.com/minton/layouts/default/widgets.html">
+                                                        <i class="ri-honour-line"></i>
+                                                        <span> Widgets </span>
+                                                    </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="https://coderthemes.com/minton/layouts/default/index-dark.html#sidebarIcons"
+                                                       data-bs-toggle="collapse" aria-expanded="false"
+                                                       aria-controls="sidebarIcons">
+                                                        <i class="ri-markup-line"></i>
+                                                        <span> Icons </span>
+                                                        <span class="menu-arrow"></span>
+                                                    </a>
+                                                    <div class="collapse" id="sidebarIcons">
+                                                        <ul class="nav-second-level">
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/icons-feather.html">Feather</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/icons-remix.html">Remix</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/icons-boxicons.html">Boxicons</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/icons-mdi.html">Material
+                                                                    Design</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/icons-font-awesome.html">Font
+                                                                    Awesome 5</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/icons-weather.html">Weather</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+
+                                                <li>
+                                                    <a href="https://coderthemes.com/minton/layouts/default/index-dark.html#sidebarForms"
+                                                       data-bs-toggle="collapse" aria-expanded="false"
+                                                       aria-controls="sidebarForms">
+                                                        <i class="ri-eraser-line"></i>
+                                                        <span> Forms </span>
+                                                        <span class="menu-arrow"></span>
+                                                    </a>
+                                                    <div class="collapse" id="sidebarForms">
+                                                        <ul class="nav-second-level">
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/forms-elements.html">General
+                                                                    Elements</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/forms-advanced.html">Advanced</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/forms-validation.html">Validation</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/forms-pickers.html">Pickers</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/forms-wizard.html">Wizard</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/forms-masks.html">Masks</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/forms-quilljs.html">Quilljs
+                                                                    Editor</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/forms-file-uploads.html">File
+                                                                    Uploads</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/forms-x-editable.html">X
+                                                                    Editable</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+
+                                                <li>
+                                                    <a href="https://coderthemes.com/minton/layouts/default/index-dark.html#sidebarTables"
+                                                       data-bs-toggle="collapse" aria-expanded="false"
+                                                       aria-controls="sidebarTables">
+                                                        <i class="ri-table-line"></i>
+                                                        <span> Tables </span>
+                                                        <span class="menu-arrow"></span>
+                                                    </a>
+                                                    <div class="collapse" id="sidebarTables">
+                                                        <ul class="nav-second-level">
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/tables-basic.html">Basic
+                                                                    Tables</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/tables-datatables.html">Data
+                                                                    Tables</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/tables-editable.html">Editable
+                                                                    Tables</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/tables-responsive.html">Responsive
+                                                                    Tables</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/tables-footables.html">FooTable</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/tables-tablesaw.html">Tablesaw
+                                                                    Tables</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+
+                                                <li>
+                                                    <a href="https://coderthemes.com/minton/layouts/default/index-dark.html#sidebarCharts"
+                                                       data-bs-toggle="collapse" aria-expanded="false"
+                                                       aria-controls="sidebarCharts">
+                                                        <i class="ri-bar-chart-line"></i>
+                                                        <span> Charts </span>
+                                                        <span class="menu-arrow"></span>
+                                                    </a>
+                                                    <div class="collapse" id="sidebarCharts">
+                                                        <ul class="nav-second-level">
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/charts-flot.html">Flot</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/charts-apex.html">Apex</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/charts-morris.html">Morris</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/charts-chartjs.html">Chartjs</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/charts-c3.html">C3</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/charts-peity.html">Peity</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/charts-chartist.html">Chartist</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/charts-sparklines.html">Sparklines</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/charts-knob.html">Jquery
+                                                                    Knob</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+
+                                                <li>
+                                                    <a href="https://coderthemes.com/minton/layouts/default/index-dark.html#sidebarMaps"
+                                                       data-bs-toggle="collapse" aria-expanded="false"
+                                                       aria-controls="sidebarMaps">
+                                                        <i class="ri-map-pin-line"></i>
+                                                        <span> Maps </span>
+                                                        <span class="menu-arrow"></span>
+                                                    </a>
+                                                    <div class="collapse" id="sidebarMaps">
+                                                        <ul class="nav-second-level">
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/maps-google.html">Google</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/maps-vector.html">Vector</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/maps-mapael.html">Mapael</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+
+                                                <li>
+                                                    <a href="https://coderthemes.com/minton/layouts/default/index-dark.html#sidebarMultilevel"
+                                                       data-bs-toggle="collapse" aria-expanded="false"
+                                                       aria-controls="sidebarMultilevel">
+                                                        <i class="ri-share-line"></i>
+                                                        <span> Multi Level </span>
+                                                        <span class="menu-arrow"></span>
+                                                    </a>
+                                                    <div class="collapse" id="sidebarMultilevel">
+                                                        <ul class="nav-second-level">
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/index-dark.html#sidebarMultilevel2"
+                                                                   data-bs-toggle="collapse" aria-expanded="false"
+                                                                   aria-controls="sidebarMultilevel2">
+                                                                    Second Level <span class="menu-arrow"></span>
+                                                                </a>
+                                                                <div class="collapse" id="sidebarMultilevel2">
+                                                                    <ul class="nav-second-level">
+                                                                        <li>
+                                                                            <a href="javascript: void(0);">Item 1</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="javascript: void(0);">Item 2</a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="https://coderthemes.com/minton/layouts/default/index-dark.html#sidebarMultilevel3"
+                                                                   data-bs-toggle="collapse" aria-expanded="false"
+                                                                   aria-controls="sidebarMultilevel3">
+                                                                    Third Level <span class="menu-arrow"></span>
+                                                                </a>
+                                                                <div class="collapse" id="sidebarMultilevel3">
+                                                                    <ul class="nav-second-level">
+                                                                        <li>
+                                                                            <a href="javascript: void(0);">Item 1</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="https://coderthemes.com/minton/layouts/default/index-dark.html#sidebarMultilevel4"
+                                                                               data-bs-toggle="collapse"
+                                                                               aria-expanded="false"
+                                                                               aria-controls="sidebarMultilevel4">
+                                                                                Item 2 <span class="menu-arrow"></span>
+                                                                            </a>
+                                                                            <div class="collapse"
+                                                                                 id="sidebarMultilevel4">
+                                                                                <ul class="nav-second-level">
+                                                                                    <li>
+                                                                                        <a href="javascript: void(0);">Item
+                                                                                            1</a>
+                                                                                    </li>
+                                                                                    <li>
+                                                                                        <a href="javascript: void(0);">Item
+                                                                                            2</a>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                            </ul>
+
+                                        </div>
+                                        <!-- End Sidebar -->
+
+                                        <div class="clearfix"></div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="simplebar-placeholder" style="width: auto; height: 1240px;"></div>
+                    </div>
+                    <div class="simplebar-track simplebar-horizontal" style="visibility: hidden;">
+                        <div class="simplebar-scrollbar" style="width: 0px; display: none;"></div>
+                    </div>
+                    <div class="simplebar-track simplebar-vertical" style="visibility: visible;">
+                        <div class="simplebar-scrollbar"
+                             style="height: 518px; transform: translate3d(0px, 0px, 0px); display: block;"></div>
+                    </div>
+                </div>
+                <!-- Sidebar -left -->
+
+            </div>
+            <!-- Left Sidebar End -->
+
+            <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
+
+            <div class="content-page">
+                <div class="content">
+
+                    <!-- Start Content-->
+
+
+                </div> <!-- content -->
+
+                <!-- Footer Start -->
+                <footer class="footer">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <script>document.write(new Date().getFullYear())</script>
+                                2023 © Minton theme by <a
+                                    href="https://coderthemes.com/minton/layouts/default/index-dark.html">Coderthemes</a>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="text-md-end footer-links d-none d-sm-block">
+                                    <a href="javascript:void(0);">About Us</a>
+                                    <a href="javascript:void(0);">Help</a>
+                                    <a href="javascript:void(0);">Contact Us</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+                <!-- end Footer -->
+
+            </div>
+
+            <!-- ============================================================== -->
+            <!-- End Page content -->
+            <!-- ============================================================== -->
+
+
+        </div>
+        <!-- END wrapper -->
+
+        <!-- Right Sidebar -->
+        <div class="right-bar">
+            <div data-simplebar="init" class="h-100">
+                <div class="simplebar-wrapper" style="margin: 0px;">
+                    <div class="simplebar-height-auto-observer-wrapper">
+                        <div class="simplebar-height-auto-observer"></div>
+                    </div>
+                    <div class="simplebar-mask">
+                        <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
+                            <div class="simplebar-content-wrapper" style="height: 100%; overflow: hidden scroll;">
+                                <div class="simplebar-content" style="padding: 0px;">
+
+                                    <!-- Nav tabs -->
+                                    <ul class="nav nav-tabs nav-bordered nav-justified" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link py-2" data-bs-toggle="tab"
+                                               href="https://coderthemes.com/minton/layouts/default/index-dark.html#chat-tab"
+                                               role="tab">
+                                                <i class="mdi mdi-message-text-outline d-block font-22 my-1"></i>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link py-2" data-bs-toggle="tab"
+                                               href="https://coderthemes.com/minton/layouts/default/index-dark.html#tasks-tab"
+                                               role="tab">
+                                                <i class="mdi mdi-format-list-checkbox d-block font-22 my-1"></i>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link py-2 active" data-bs-toggle="tab"
+                                               href="https://coderthemes.com/minton/layouts/default/index-dark.html#settings-tab"
+                                               role="tab">
+                                                <i class="mdi mdi-cog-outline d-block font-22 my-1"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+
+                                    <!-- Tab panes -->
+                                    <div class="tab-content pt-0">
+                                        <div class="tab-pane" id="chat-tab" role="tabpanel">
+
+                                            <form class="search-bar p-3">
+                                                <div class="position-relative">
+                                                    <input type="text" class="form-control" placeholder="Search...">
+                                                    <span class="mdi mdi-magnify"></span>
+                                                </div>
+                                            </form>
+
+                                            <h6 class="fw-medium px-3 mt-2 text-uppercase">Group Chats</h6>
+
+                                            <div class="p-2">
+                                                <a href="javascript: void(0);"
+                                                   class="text-reset notification-item ps-3 mb-2 d-block">
+                                                    <i class="mdi mdi-checkbox-blank-circle-outline me-1 text-success"></i>
+                                                    <span class="mb-0 mt-1">App Development</span>
+                                                </a>
+
+                                                <a href="javascript: void(0);"
+                                                   class="text-reset notification-item ps-3 mb-2 d-block">
+                                                    <i class="mdi mdi-checkbox-blank-circle-outline me-1 text-warning"></i>
+                                                    <span class="mb-0 mt-1">Office Work</span>
+                                                </a>
+
+                                                <a href="javascript: void(0);"
+                                                   class="text-reset notification-item ps-3 mb-2 d-block">
+                                                    <i class="mdi mdi-checkbox-blank-circle-outline me-1 text-danger"></i>
+                                                    <span class="mb-0 mt-1">Personal Group</span>
+                                                </a>
+
+                                                <a href="javascript: void(0);"
+                                                   class="text-reset notification-item ps-3 d-block">
+                                                    <i class="mdi mdi-checkbox-blank-circle-outline me-1"></i>
+                                                    <span class="mb-0 mt-1">Freelance</span>
+                                                </a>
+                                            </div>
+
+                                            <h6 class="fw-medium px-3 mt-3 text-uppercase">Favourites <a
+                                                    href="javascript: void(0);" class="font-18 text-danger"><i
+                                                    class="float-end mdi mdi-plus-circle"></i></a></h6>
+
+                                            <div class="p-2">
+                                                <a href="javascript: void(0);" class="text-reset notification-item">
+                                                    <div class="d-flex align-items-start">
+                                                        <div class="position-relative me-2">
+                                                            <span class="user-status"></span>
+                                                            <img src="./Sales Dashboard _ Minton - Admin &amp; Dashboard Template_files/avatar-10.jpg"
+                                                                 class="rounded-circle avatar-sm" alt="user-pic">
+                                                        </div>
+                                                        <div class="flex-1 overflow-hidden">
+                                                            <h6 class="mt-0 mb-1 font-14">Andrew Mackie</h6>
+                                                            <div class="font-13 text-muted">
+                                                                <p class="mb-0 text-truncate">It will seem like
+                                                                    simplified English.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+
+                                                <a href="javascript: void(0);" class="text-reset notification-item">
+                                                    <div class="d-flex align-items-start">
+                                                        <div class="position-relative me-2">
+                                                            <span class="user-status"></span>
+                                                            <img src="./Sales Dashboard _ Minton - Admin &amp; Dashboard Template_files/avatar-1.jpg"
+                                                                 class="rounded-circle avatar-sm" alt="user-pic">
+                                                        </div>
+                                                        <div class="flex-1 overflow-hidden">
+                                                            <h6 class="mt-0 mb-1 font-14">Rory Dalyell</h6>
+                                                            <div class="font-13 text-muted">
+                                                                <p class="mb-0 text-truncate">To an English person, it
+                                                                    will seem like simplified</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+
+                                                <a href="javascript: void(0);" class="text-reset notification-item">
+                                                    <div class="d-flex align-items-start">
+                                                        <div class="position-relative me-2">
+                                                            <span class="user-status busy"></span>
+                                                            <img src="./Sales Dashboard _ Minton - Admin &amp; Dashboard Template_files/avatar-9.jpg"
+                                                                 class="rounded-circle avatar-sm" alt="user-pic">
+                                                        </div>
+                                                        <div class="flex-1 overflow-hidden">
+                                                            <h6 class="mt-0 mb-1 font-14">Jaxon Dunhill</h6>
+                                                            <div class="font-13 text-muted">
+                                                                <p class="mb-0 text-truncate">To achieve this, it would
+                                                                    be necessary.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+
+                                            <h6 class="fw-medium px-3 mt-3 text-uppercase">Other Chats <a
+                                                    href="javascript: void(0);" class="font-18 text-danger"><i
+                                                    class="float-end mdi mdi-plus-circle"></i></a></h6>
+
+                                            <div class="p-2 pb-4">
+                                                <a href="javascript: void(0);" class="text-reset notification-item">
+                                                    <div class="d-flex align-items-start">
+                                                        <div class="position-relative me-2">
+                                                            <span class="user-status online"></span>
+                                                            <img src="./Sales Dashboard _ Minton - Admin &amp; Dashboard Template_files/avatar-2.jpg"
+                                                                 class="rounded-circle avatar-sm" alt="user-pic">
+                                                        </div>
+                                                        <div class="flex-1 overflow-hidden">
+                                                            <h6 class="mt-0 mb-1 font-14">Jackson Therry</h6>
+                                                            <div class="font-13 text-muted">
+                                                                <p class="mb-0 text-truncate">Everyone realizes why a
+                                                                    new common language.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+
+                                                <a href="javascript: void(0);" class="text-reset notification-item">
+                                                    <div class="d-flex align-items-start">
+                                                        <div class="position-relative me-2">
+                                                            <span class="user-status away"></span>
+                                                            <img src="./Sales Dashboard _ Minton - Admin &amp; Dashboard Template_files/avatar-4.jpg"
+                                                                 class="rounded-circle avatar-sm" alt="user-pic">
+                                                        </div>
+                                                        <div class="flex-1 overflow-hidden">
+                                                            <h6 class="mt-0 mb-1 font-14">Charles Deakin</h6>
+                                                            <div class="font-13 text-muted">
+                                                                <p class="mb-0 text-truncate">The languages only differ
+                                                                    in their grammar.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+
+                                                <a href="javascript: void(0);" class="text-reset notification-item">
+                                                    <div class="d-flex align-items-start">
+                                                        <div class="position-relative me-2">
+                                                            <span class="user-status online"></span>
+                                                            <img src="./Sales Dashboard _ Minton - Admin &amp; Dashboard Template_files/avatar-5.jpg"
+                                                                 class="rounded-circle avatar-sm" alt="user-pic">
+                                                        </div>
+                                                        <div class="flex-1 overflow-hidden">
+                                                            <h6 class="mt-0 mb-1 font-14">Ryan Salting</h6>
+                                                            <div class="font-13 text-muted">
+                                                                <p class="mb-0 text-truncate">If several languages
+                                                                    coalesce the grammar of the resulting.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+
+                                                <a href="javascript: void(0);" class="text-reset notification-item">
+                                                    <div class="d-flex align-items-start">
+                                                        <div class="position-relative me-2">
+                                                            <span class="user-status online"></span>
+                                                            <img src="./Sales Dashboard _ Minton - Admin &amp; Dashboard Template_files/avatar-6.jpg"
+                                                                 class="rounded-circle avatar-sm" alt="user-pic">
+                                                        </div>
+                                                        <div class="flex-1 overflow-hidden">
+                                                            <h6 class="mt-0 mb-1 font-14">Sean Howse</h6>
+                                                            <div class="font-13 text-muted">
+                                                                <p class="mb-0 text-truncate">It will seem like
+                                                                    simplified English.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+
+                                                <a href="javascript: void(0);" class="text-reset notification-item">
+                                                    <div class="d-flex align-items-start">
+                                                        <div class="position-relative me-2">
+                                                            <span class="user-status busy"></span>
+                                                            <img src="./Sales Dashboard _ Minton - Admin &amp; Dashboard Template_files/avatar-7.jpg"
+                                                                 class="rounded-circle avatar-sm" alt="user-pic">
+                                                        </div>
+                                                        <div class="flex-1 overflow-hidden">
+                                                            <h6 class="mt-0 mb-1 font-14">Dean Coward</h6>
+                                                            <div class="font-13 text-muted">
+                                                                <p class="mb-0 text-truncate">The new common language
+                                                                    will be more simple.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+
+                                                <a href="javascript: void(0);" class="text-reset notification-item">
+                                                    <div class="d-flex align-items-start">
+                                                        <div class="position-relative me-2">
+                                                            <span class="user-status away"></span>
+                                                            <img src="./Sales Dashboard _ Minton - Admin &amp; Dashboard Template_files/avatar-8.jpg"
+                                                                 class="rounded-circle avatar-sm" alt="user-pic">
+                                                        </div>
+                                                        <div class="flex-1 overflow-hidden">
+                                                            <h6 class="mt-0 mb-1 font-14">Hayley East</h6>
+                                                            <div class="font-13 text-muted">
+                                                                <p class="mb-0 text-truncate">One could refuse to pay
+                                                                    expensive translators.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+
+                                                <div class="text-center mt-3">
+                                                    <a href="javascript:void(0);" class="btn btn-sm btn-white">
+                                                        <i class="mdi mdi-spin mdi-loading me-2"></i>
+                                                        Load more
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="tab-pane" id="tasks-tab" role="tabpanel">
+                                            <h6 class="fw-medium p-3 m-0 text-uppercase">Working Tasks</h6>
+                                            <div class="px-2">
+                                                <a href="javascript: void(0);"
+                                                   class="text-reset item-hovered d-block p-2">
+                                                    <p class="text-muted mb-0">App Development<span class="float-end">75%</span>
+                                                    </p>
+                                                    <div class="progress mt-2" style="height: 4px;">
+                                                        <div class="progress-bar bg-success" role="progressbar"
+                                                             style="width: 75%" aria-valuenow="75" aria-valuemin="0"
+                                                             aria-valuemax="100"></div>
+                                                    </div>
+                                                </a>
+
+                                                <a href="javascript: void(0);"
+                                                   class="text-reset item-hovered d-block p-2">
+                                                    <p class="text-muted mb-0">Database Repair<span class="float-end">37%</span>
+                                                    </p>
+                                                    <div class="progress mt-2" style="height: 4px;">
+                                                        <div class="progress-bar bg-info" role="progressbar"
+                                                             style="width: 37%" aria-valuenow="37" aria-valuemin="0"
+                                                             aria-valuemax="100"></div>
+                                                    </div>
+                                                </a>
+
+                                                <a href="javascript: void(0);"
+                                                   class="text-reset item-hovered d-block p-2">
+                                                    <p class="text-muted mb-0">Backup Create<span
+                                                            class="float-end">52%</span></p>
+                                                    <div class="progress mt-2" style="height: 4px;">
+                                                        <div class="progress-bar bg-warning" role="progressbar"
+                                                             style="width: 52%" aria-valuenow="52" aria-valuemin="0"
+                                                             aria-valuemax="100"></div>
+                                                    </div>
+                                                </a>
+                                            </div>
+
+                                            <h6 class="fw-medium px-3 mb-0 mt-4 text-uppercase">Upcoming Tasks</h6>
+
+                                            <div class="p-2">
+                                                <a href="javascript: void(0);"
+                                                   class="text-reset item-hovered d-block p-2">
+                                                    <p class="text-muted mb-0">Sales Reporting<span class="float-end">12%</span>
+                                                    </p>
+                                                    <div class="progress mt-2" style="height: 4px;">
+                                                        <div class="progress-bar bg-danger" role="progressbar"
+                                                             style="width: 12%" aria-valuenow="12" aria-valuemin="0"
+                                                             aria-valuemax="100"></div>
+                                                    </div>
+                                                </a>
+
+                                                <a href="javascript: void(0);"
+                                                   class="text-reset item-hovered d-block p-2">
+                                                    <p class="text-muted mb-0">Redesign Website<span class="float-end">67%</span>
+                                                    </p>
+                                                    <div class="progress mt-2" style="height: 4px;">
+                                                        <div class="progress-bar bg-primary" role="progressbar"
+                                                             style="width: 67%" aria-valuenow="67" aria-valuemin="0"
+                                                             aria-valuemax="100"></div>
+                                                    </div>
+                                                </a>
+
+                                                <a href="javascript: void(0);"
+                                                   class="text-reset item-hovered d-block p-2">
+                                                    <p class="text-muted mb-0">New Admin Design<span class="float-end">84%</span>
+                                                    </p>
+                                                    <div class="progress mt-2" style="height: 4px;">
+                                                        <div class="progress-bar bg-success" role="progressbar"
+                                                             style="width: 84%" aria-valuenow="84" aria-valuemin="0"
+                                                             aria-valuemax="100"></div>
+                                                    </div>
+                                                </a>
+                                            </div>
+
+                                            <div class="d-grid p-3 mt-2">
+                                                <a href="javascript: void(0);"
+                                                   class="btn btn-success waves-effect waves-light">Create Task</a>
+                                            </div>
+
+                                        </div>
+                                        <div class="tab-pane active" id="settings-tab" role="tabpanel">
+                                            <h6 class="fw-medium px-3 m-0 py-2 font-13 text-uppercase bg-light">
+                                                <span class="d-block py-1">Theme Settings</span>
+                                            </h6>
+
+                                            <div class="p-3">
+                                                <div class="alert alert-warning" role="alert">
+                                                    <strong>Customize </strong> the overall color scheme, sidebar menu,
+                                                    etc.
+                                                </div>
+
+                                                <h6 class="fw-medium font-14 mt-4 mb-2 pb-1">Color Scheme</h6>
+                                                <div class="form-check form-switch mb-1">
+                                                    <input class="form-check-input" type="checkbox"
+                                                           name="color-scheme-mode" value="light" id="light-mode-check"
+                                                           checked="">
+                                                    <label class="form-check-label" for="light-mode-check">Light
+                                                        Mode</label>
+                                                </div>
+
+                                                <div class="form-check form-switch mb-1">
+                                                    <input class="form-check-input" type="checkbox"
+                                                           name="color-scheme-mode" value="dark" id="dark-mode-check">
+                                                    <label class="form-check-label" for="dark-mode-check">Dark
+                                                        Mode</label>
+                                                </div>
+
+                                                <!-- Width -->
+                                                <h6 class="fw-medium font-14 mt-4 mb-2 pb-1">Width</h6>
+                                                <div class="form-check form-switch mb-1">
+                                                    <input class="form-check-input" type="checkbox" name="width"
+                                                           value="fluid" id="fluid-check" checked="">
+                                                    <label class="form-check-label" for="fluid-check">Fluid</label>
+                                                </div>
+
+                                                <div class="form-check form-switch mb-1">
+                                                    <input class="form-check-input" type="checkbox" name="width"
+                                                           value="boxed" id="boxed-check">
+                                                    <label class="form-check-label" for="boxed-check">Boxed</label>
+                                                </div>
+
+
+                                                <!-- Topbar -->
+                                                <h6 class="fw-medium font-14 mt-4 mb-2 pb-1">Topbar</h6>
+                                                <div class="form-check form-switch mb-1">
+                                                    <input class="form-check-input" type="checkbox" name="topbar-color"
+                                                           value="dark" id="darktopbar-check" checked="">
+                                                    <label class="form-check-label" for="darktopbar-check">Dark</label>
+                                                </div>
+
+                                                <div class="form-check form-switch mb-1">
+                                                    <input class="form-check-input" type="checkbox" name="topbar-color"
+                                                           value="light" id="lighttopbar-check">
+                                                    <label class="form-check-label"
+                                                           for="lighttopbar-check">Light</label>
+                                                </div>
+
+
+                                                <!-- Menu positions -->
+                                                <h6 class="fw-medium font-14 mt-4 mb-2 pb-1">Menus Positon <small>(Leftsidebar
+                                                    and Topbar)</small></h6>
+                                                <div class="form-check form-switch mb-1">
+                                                    <input class="form-check-input" type="checkbox"
+                                                           name="menus-position" value="fixed" id="fixed-check"
+                                                           checked="">
+                                                    <label class="form-check-label" for="fixed-check">Fixed</label>
+                                                </div>
+
+                                                <div class="form-check form-switch mb-1">
+                                                    <input class="form-check-input" type="checkbox"
+                                                           name="menus-position" value="scrollable"
+                                                           id="scrollable-check">
+                                                    <label class="form-check-label"
+                                                           for="scrollable-check">Scrollable</label>
+                                                </div>
+
+
+                                                <!-- Left Sidebar-->
+                                                <h6 class="fw-medium font-14 mt-4 mb-2 pb-1">Left Sidebar Color</h6>
+                                                <div class="form-check form-switch mb-1">
+                                                    <input class="form-check-input" type="checkbox"
+                                                           name="leftsidebar-color" value="light" id="light-check"
+                                                           checked="">
+                                                    <label class="form-check-label" for="light-check">Light</label>
+                                                </div>
+
+                                                <div class="form-check form-switch mb-1">
+                                                    <input class="form-check-input" type="checkbox"
+                                                           name="leftsidebar-color" value="dark" id="dark-check">
+                                                    <label class="form-check-label" for="dark-check">Dark</label>
+                                                </div>
+
+                                                <div class="form-check form-switch mb-1">
+                                                    <input class="form-check-input" type="checkbox"
+                                                           name="leftsidebar-color" value="brand" id="brand-check">
+                                                    <label class="form-check-label" for="brand-check">Brand</label>
+                                                </div>
+
+                                                <div class="form-check form-switch mb-1">
+                                                    <input class="form-check-input" type="checkbox"
+                                                           name="leftsidebar-color" value="gradient"
+                                                           id="gradient-check">
+                                                    <label class="form-check-label"
+                                                           for="gradient-check">Gradient</label>
+                                                </div>
+
+
+                                                <!-- size -->
+                                                <h6 class="fw-medium font-14 mt-4 mb-2 pb-1">Left Sidebar Size</h6>
+                                                <div class="form-check form-switch mb-1">
+                                                    <input class="form-check-input" type="checkbox"
+                                                           name="leftsidebar-size" value="default"
+                                                           id="default-size-check" checked="">
+                                                    <label class="form-check-label"
+                                                           for="default-size-check">Default</label>
+                                                </div>
+
+                                                <div class="form-check form-switch mb-1">
+                                                    <input class="form-check-input" type="checkbox"
+                                                           name="leftsidebar-size" value="condensed"
+                                                           id="condensed-check">
+                                                    <label class="form-check-label" for="condensed-check">Condensed
+                                                        <small>(Extra Small size)</small></label>
+                                                </div>
+
+                                                <div class="form-check form-switch mb-1">
+                                                    <input class="form-check-input" type="checkbox"
+                                                           name="leftsidebar-size" value="compact" id="compact-check">
+                                                    <label class="form-check-label" for="compact-check">Compact <small>(Small
+                                                        size)</small></label>
+                                                </div>
+
+
+                                                <!-- User info -->
+                                                <h6 class="fw-medium font-14 mt-4 mb-2 pb-1">Sidebar User Info</h6>
+                                                <div class="form-check form-switch mb-1">
+                                                    <input class="form-check-input" type="checkbox"
+                                                           name="leftsidebar-user" value="fixed" id="sidebaruser-check">
+                                                    <label class="form-check-label"
+                                                           for="sidebaruser-check">Enable</label>
+                                                </div>
+
+                                                <div class="d-grid mt-4">
+                                                    <button class="btn btn-primary" id="resetBtn">Reset to Default
+                                                    </button>
+
+                                                    <a href="https://wrapbootstrap.com/theme/minton-admin-dashboard-landing-template-WB0858DB6?ref=coderthemes"
+                                                       class="btn btn-danger mt-2" target="_blank"><i
+                                                            class="mdi mdi-basket me-1"></i> Purchase Now</a>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="simplebar-placeholder" style="width: auto; height: 1264px;"></div>
+                </div>
+                <div class="simplebar-track simplebar-horizontal" style="visibility: hidden;">
+                    <div class="simplebar-scrollbar" style="width: 0px; display: none;"></div>
+                </div>
+                <div class="simplebar-track simplebar-vertical" style="visibility: visible;">
+                    <div class="simplebar-scrollbar"
+                         style="height: 658px; transform: translate3d(0px, 0px, 0px); display: block;"></div>
+                </div>
+            </div> <!-- end slimscroll-menu-->
+        </div>
+        <!-- /Right-bar -->
+
+        <!-- Right bar overlay-->
+        <div class="rightbar-overlay"></div>
+
+        <!-- Vendor js -->
+        <script src="./Sales Dashboard _ Minton - Admin &amp; Dashboard Template_files/vendor.min.js.download"></script>
+
+        <!-- KNOB JS -->
+        <script src="./Sales Dashboard _ Minton - Admin &amp; Dashboard Template_files/jquery.knob.min.js.download"></script>
+        <!-- Apex js-->
+        <script src="./Sales Dashboard _ Minton - Admin &amp; Dashboard Template_files/apexcharts.min.js.download"></script>
+
+        <!-- Plugins js-->
+        <script src="./Sales Dashboard _ Minton - Admin &amp; Dashboard Template_files/jquery-jvectormap-1.2.2.min.js.download"></script>
+        <script src="./Sales Dashboard _ Minton - Admin &amp; Dashboard Template_files/jquery-jvectormap-world-mill-en.js.download"></script>
+
+        <!-- Dashboard init-->
+        <script src="./Sales Dashboard _ Minton - Admin &amp; Dashboard Template_files/dashboard-sales.init.js.download"></script>
+        <div class="jvectormap-label"></div>
+
+        <!-- App js -->
+        <script src="./Sales Dashboard _ Minton - Admin &amp; Dashboard Template_files/app.min.js.download"></script>
+
+        <svg id="SvgjsSvg1378" width="2" height="0" xmlns="http://www.w3.org/2000/svg" version="1.1"
+             xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev"
+             style="overflow: hidden; top: -100%; left: -100%; position: absolute; opacity: 0;">
+            <defs id="SvgjsDefs1379"></defs>
+            <polyline id="SvgjsPolyline1380" points="0,0"></polyline>
+            <path id="SvgjsPath1381"
+                  d="M-1 199.26666666666668L-1 199.26666666666668C-1 199.26666666666668 42.07824186731557 199.26666666666668 42.07824186731557 199.26666666666668C42.07824186731557 199.26666666666668 81.44175845286885 199.26666666666668 81.44175845286885 199.26666666666668C81.44175845286885 199.26666666666668 123.52000032018442 199.26666666666668 123.52000032018442 199.26666666666668C123.52000032018442 199.26666666666668 164.24087954661886 199.26666666666668 164.24087954661886 199.26666666666668C164.24087954661886 199.26666666666668 206.31912141393443 199.26666666666668 206.31912141393443 199.26666666666668C206.31912141393443 199.26666666666668 247.04000064036885 199.26666666666668 247.04000064036885 199.26666666666668C247.04000064036885 199.26666666666668 289.1182425076844 199.26666666666668 289.1182425076844 199.26666666666668C289.1182425076844 199.26666666666668 331.19648437499995 199.26666666666668 331.19648437499995 199.26666666666668C331.19648437499995 199.26666666666668 371.91736360143443 199.26666666666668 371.91736360143443 199.26666666666668C371.91736360143443 199.26666666666668 413.99560546875 199.26666666666668 413.99560546875 199.26666666666668C413.99560546875 199.26666666666668 413.99560546875 199.26666666666668 413.99560546875 199.26666666666668 "></path>
+        </svg>
+    </body>
+</html>

@@ -10,7 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class FirstController {
     //The url to this method is localhot:8080/first/good-night
     @GetMapping("/good-night")
-    public String goodNight(){
-        return "";
+    public String goodNight() {
+        return "first-page";
+    }
+
+    @GetMapping("/good-morning")
+    public String goodMorning() {
+        return "second-page";
     }
 }
