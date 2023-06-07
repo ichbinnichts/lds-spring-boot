@@ -11,11 +11,11 @@ public class FirstController {
     //The url to this method is localhot:8080/first/good-night
     @GetMapping("/good-night")
     public String goodNight() {
-        return "first-page";
+        return "playground/first-page";
     }
 
     @GetMapping("/good-morning")
     public String goodMorning() {
-        return "second-page";
+        return "playground/second-page";
     }
 }
