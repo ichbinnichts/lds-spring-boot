@@ -49,4 +49,8 @@ public class UserFakeDao {
 
         return new ArrayList<>(database.values());
     }
+
+    public UserModel findById(int id) {
+        return database.get(id);
+    }
 }

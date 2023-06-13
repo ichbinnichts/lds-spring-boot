@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -24,5 +25,12 @@ public class UserController {
         final List<UserModel> userModels = userService.find();
         model.addAttribute("users", userModels);
         return "user/list";
+    }
+
+    @GetMapping("/details/{id}")
+    public String GetDetailsPage(@PathVariable("id") final int id, final Model model) {
+        UserModel user = userService.findById(id);
+        model.addAttribute("user", user);
+        return "/user/detail";
     }
 }

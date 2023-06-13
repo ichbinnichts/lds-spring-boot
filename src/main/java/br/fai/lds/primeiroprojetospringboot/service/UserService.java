@@ -17,4 +17,8 @@ public class UserService {
     public List<UserModel> find() {
         return userFakeDao.find();
     }
+
+    public UserModel findById(final int id) {
+        return userFakeDao.findById(id);
+    }
 }
