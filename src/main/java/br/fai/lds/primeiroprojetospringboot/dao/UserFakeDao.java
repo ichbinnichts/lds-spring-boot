@@ -53,4 +53,9 @@ public class UserFakeDao {
     public UserModel findById(int id) {
         return database.get(id);
     }
+
+    public UserModel update(final UserModel user) {
+        database.put(user.getId(), user);
+        return database.get(user.getId());
+    }
 }

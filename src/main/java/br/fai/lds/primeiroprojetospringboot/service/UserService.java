@@ -21,4 +21,9 @@ public class UserService {
     public UserModel findById(final int id) {
         return userFakeDao.findById(id);
     }
+
+    public UserModel update(final UserModel user) {
+        final UserModel updatedUser = userFakeDao.update(user);
+        return updatedUser;
+    }
 }

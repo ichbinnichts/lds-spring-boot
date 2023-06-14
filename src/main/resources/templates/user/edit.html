@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Users</title>
+</head>
+<body>
+<div layout:fragment="body">
+    <h1>Edit User</h1>
+
+
+    <form method="post" th:action="@{/user/update}">
+        <div class="form-row">
+            <div class="form-group col-12">
+
+                <labeL for="fullName">Full Name</labeL>
+                <input type="text"
+                       th:name="fullName"
+                       th:field="${user.fullName}"
+                       id="fullName"
+                       class="form-control">
+
+                <labeL for="email">Email</labeL>
+                <input type="text"
+                       th:name="email"
+                       th:field="${user.email}"
+                       id="email"
+                       class="form-control">
+
+
+            </div>
+            <div class="form-group col-12">
+                <labeL for="userName">Username</labeL>
+                <input type="text"
+                       th:name="userName"
+                       th:field="${user.userName}"
+                       id="userName"
+                       class="form-control">
+
+                <labeL for="password">Password</labeL>
+                <input type="text"
+                       th:name="password"
+                       th:field="${user.password}"
+                       id="password"
+                       class="form-control">
+            </div>
+        </div>
+
+        <input type="hidden" name="id" id="id" th:field="${user.id}">
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+
+
+</div>
+</body>
+</html>
