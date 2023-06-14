@@ -16,6 +16,7 @@
             <th>Name</th>
             <th></th>
             <th></th>
+            <th></th>
         </tr>
         <tr th:each="user : ${users}">
             <td th:text="${user.id}"></td>
@@ -26,6 +27,10 @@
             </td>
             <td>
                 <a class="btn btn-warning btn-sm" th:href="@{/user/edit/{id}  (id=${user.id})  }">Edit</a>
+            </td>
+
+            <td>
+                <a class="btn btn-danger btn-sm" th:href="@{/user/delete/{id}  (id=${user.id})  }">Delete</a>
             </td>
         </tr>
     </table>

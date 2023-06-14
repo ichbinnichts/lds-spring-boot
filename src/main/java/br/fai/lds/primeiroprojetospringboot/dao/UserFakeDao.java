@@ -58,4 +58,9 @@ public class UserFakeDao {
         database.put(user.getId(), user);
         return database.get(user.getId());
     }
+
+    public boolean delete(final int id) {
+        UserModel removedUser = database.remove(id);
+        return removedUser == null ? false : true;
+    }
 }

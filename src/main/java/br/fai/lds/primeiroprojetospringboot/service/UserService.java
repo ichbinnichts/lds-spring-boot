@@ -35,4 +35,8 @@ public class UserService {
         final UserModel updatedUser = userFakeDao.update(model);
         return updatedUser;
     }
+
+    public boolean delete(final int id) {
+        return userFakeDao.delete(id);
+    }
 }

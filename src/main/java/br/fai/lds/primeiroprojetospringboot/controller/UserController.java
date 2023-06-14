@@ -46,4 +46,12 @@ public class UserController {
 
         return "redirect:/user/list";
     }
+
+    @GetMapping("/delete/{id}")
+    public String deleteUser(@PathVariable("id") final int id) {
+
+        boolean response = userService.delete(id);
+        System.out.println("Remove user: " + response);
+        return "redirect:/user/list";
+    }
 }
