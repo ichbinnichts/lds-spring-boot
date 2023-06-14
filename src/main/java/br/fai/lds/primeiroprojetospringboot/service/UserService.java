@@ -23,7 +23,16 @@ public class UserService {
     }
 
     public UserModel update(final UserModel user) {
-        final UserModel updatedUser = userFakeDao.update(user);
+        if (user == null) {
+            return null;
+        }
+        UserModel model = userFakeDao.findById(user.getId());
+        if (model == null) {
+            return null;
+        }
+        model.setPassword(user.getPassword());
+        model.setFullName(user.getFullName());
+        final UserModel updatedUser = userFakeDao.update(model);
         return updatedUser;
     }
 }
