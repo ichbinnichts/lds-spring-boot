@@ -1,11 +1,12 @@
 package br.fai.lds.primeiroprojetospringboot.dao;
 
 import br.fai.lds.primeiroprojetospringboot.model.Game;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
+@Repository
 public class GameFakeDao {
     private final Map<Integer, Game> db;
     public GameFakeDao(Map<Integer, Game> database){
