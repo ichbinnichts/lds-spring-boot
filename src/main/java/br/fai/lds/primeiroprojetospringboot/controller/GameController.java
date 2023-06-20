@@ -3,6 +3,7 @@ package br.fai.lds.primeiroprojetospringboot.controller;
 import br.fai.lds.primeiroprojetospringboot.model.Game;
 import br.fai.lds.primeiroprojetospringboot.service.GameService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,8 +19,11 @@ public class GameController {
         this.service = service;
     }
     @GetMapping("/list")
-    public String get(){
+    public String get(Model model){
         List<Game> gamesList = new ArrayList<>();
+        gamesList = service.getAllGames();
+
+        model.addAttribute("games", gamesList);
         return "game/list";
     }
     @GetMapping("/details/{id}")

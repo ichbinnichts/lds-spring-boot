@@ -410,7 +410,7 @@
                                         </li>
 
                                         <li>
-                                            <a href="https://coderthemes.com/minton/layouts/default/index-dark.html#sidebarLayouts"
+                                            <a href="#sidebarLayouts"
                                                data-bs-toggle="collapse" aria-expanded="false"
                                                aria-controls="sidebarLayouts">
                                                 <i class="ri-layout-line"></i>
@@ -424,6 +424,26 @@
                                                     </li>
                                                     <li>
                                                         <a th:href="@{/user/list}">List</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+
+                                        <li>
+                                            <a href="#sidebarLayoutsCollege"
+                                               data-bs-toggle="collapse" aria-expanded="false"
+                                               aria-controls="sidebarLayoutsCollege">
+                                                <i class="ri-layout-line"></i>
+                                                <span> Games </span>
+                                                <span class="menu-arrow"></span>
+                                            </a>
+                                            <div class="collapse" id="sidebarLayoutsCollege">
+                                                <ul class="nav-second-level">
+                                                    <li>
+                                                        <a th:href="@{/}">Create</a>
+                                                    </li>
+                                                    <li>
+                                                        <a th:href="@{/games/list}">List</a>
                                                     </li>
                                                 </ul>
                                             </div>
