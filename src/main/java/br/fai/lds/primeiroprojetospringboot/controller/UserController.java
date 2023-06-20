@@ -54,4 +54,15 @@ public class UserController {
         System.out.println("Remove user: " + response);
         return "redirect:/user/list";
     }
+
+    @GetMapping("/create")
+    public String create(final UserModel userModel){
+        return "user/create";
+    }
+
+    @PostMapping("/add")
+    public String createUser(final UserModel userModel){
+        this.userService.create(userModel);
+        return "redirect:/user/list";
+    }
 }

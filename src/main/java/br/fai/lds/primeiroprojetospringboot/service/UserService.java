@@ -39,4 +39,18 @@ public class UserService {
     public boolean delete(final int id) {
         return userFakeDao.delete(id);
     }
+
+    public UserModel create(UserModel userModel){
+
+        if(userModel == null) return null;
+        if(userModel.getFullName().isEmpty()
+                || userModel.getPassword().isEmpty()
+                || userModel.getEmail().isEmpty()){
+            return null;
+        }
+        if(userModel.getPassword().length() < 4)return null;
+
+        this.userFakeDao.create(userModel);
+        return userModel;
+    }
 }
